@@ -153,16 +153,11 @@ Acesse: `Settings > Secrets and variables > Actions`
 - `AWS_SESSION_TOKEN`: Seu Session Token do Learner Lab
 - `S3_BUCKET_NAME`: Nome do bucket criado
 
-**Repository Variables:**
-- `CLOUDFRONT_DISTRIBUTION_ID`: (Opcional) ID da distribuição CloudFront
-
 #### 4.3 Estrutura do Pipeline
 
-O pipeline possui 3 jobs principais:
+O pipeline possui 1 job simplificado:
 
-1. **Test**: Executa testes automatizados
-2. **Build**: Compila a aplicação React
-3. **Deploy**: Faz deploy no S3
+**build-and-deploy**: Instala dependências → Build → Deploy no S3
 
 ### **Etapa 5: Deploy e Teste**
 
