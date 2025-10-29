@@ -19,6 +19,111 @@ Este projeto demonstra a implementação de um pipeline completo de CI/CD utiliz
 - **Cloud**: AWS (S3, IAM)
 - **Hosting**: S3 Static Website
 
+## 🏗️ Arquitetura do Sistema
+
+### **📋 Visão Geral**
+```mermaid
+graph TB
+    Dev["👨‍💻 Desenvolvedor"] --> Code["📝 Código React"]
+    Code --> Manual["🔧 Deploy Manual"]
+    Code --> Auto["🤖 Deploy Automatizado"]
+    
+    Manual --> Build1["🔨 npm run build"]
+    Build1 --> S3Manual["☁️ aws s3 sync"]
+    
+    Auto --> GitHub["🐙 GitHub Push"]
+    GitHub --> Actions["⚙️ GitHub Actions"]
+    Actions --> Build2["🔨 Build"]
+    Actions --> Deploy["🚀 Deploy"]
+    
+    S3Manual --> S3["🪣 AWS S3 Bucket"]
+    Deploy --> S3
+    S3 --> Website["🌐 Static Website"]
+```
+
+### **🔄 Fluxo Manual (Parte 1 da Live)**
+```mermaid
+sequenceDiagram
+    participant Dev as 👨‍💻 Desenvolvedor
+    participant Local as 💻 Ambiente Local
+    participant AWS as ☁️ AWS CLI
+    participant S3 as 🪣 S3 Bucket
+    participant Site as 🌐 Website
+
+    Dev->>Local: 1. npm install
+    Dev->>Local: 2. npm run build
+    Local-->>Dev: ✅ Pasta build/ criada
+    
+    Dev->>AWS: 3. aws configure --profile fiapaws
+    Dev->>AWS: 4. aws s3 mb s3://bucket-name
+    Dev->>AWS: 5. aws s3 website s3://bucket-name
+    
+    Dev->>S3: 6. aws s3 sync build/ s3://bucket-name
+    S3-->>Site: ✅ Site disponível
+    Site-->>Dev: 🌐 http://bucket.s3-website.amazonaws.com
+    
+    Note over Dev,Site: ⚠️ Processo manual: 6+ comandos toda vez
+```
+
+### **🤖 Fluxo Automatizado (Parte 2 da Live)**
+```mermaid
+sequenceDiagram
+    participant Dev as 👨‍💻 Desenvolvedor
+    participant Git as 🐙 GitHub
+    participant Actions as ⚙️ GitHub Actions
+    participant AWS as ☁️ AWS
+    participant S3 as 🪣 S3 Bucket
+    participant Site as 🌐 Website
+
+    Dev->>Git: 1. git push origin main
+    Git->>Actions: 🔔 Trigger workflow
+    
+    Actions->>Actions: 2. Checkout code
+    Actions->>Actions: 3. Setup Node.js
+    Actions->>Actions: 4. npm install
+    Actions->>Actions: 5. npm run build
+    
+    Actions->>AWS: 6. Configure credentials
+    Actions->>S3: 7. aws s3 sync build/
+    
+    S3-->>Site: ✅ Site atualizado
+    Actions-->>Dev: 📧 Notificação de sucesso
+    
+    Note over Dev,Site: ✅ Processo automatizado: 3 comandos apenas
+```
+
+### **🏛️ Infraestrutura AWS**
+```mermaid
+graph LR
+    subgraph "🌐 Internet"
+        User["👤 Usuário"]
+    end
+    
+    subgraph "☁️ AWS Cloud"
+        subgraph "🪣 S3 Bucket"
+            Files["📁 Static Files<br/>index.html<br/>CSS, JS, Assets"]
+            Config["⚙️ Website Config<br/>Index: index.html<br/>Error: error.html"]
+        end
+        
+        subgraph "🔐 IAM"
+            Policy["📋 Bucket Policy<br/>Public Read Access"]
+            Creds["🔑 AWS Credentials<br/>Access Key<br/>Secret Key<br/>Session Token"]
+        end
+    end
+    
+    subgraph "🤖 CI/CD"
+        GitHub["🐙 GitHub Actions<br/>Workflow"]
+        Secrets["🔒 GitHub Secrets<br/>AWS Credentials<br/>Bucket Name"]
+    end
+    
+    User -->|"HTTP Request"| Files
+    Files -->|"Serve Content"| User
+    Policy -->|"Allow Public Access"| Files
+    GitHub -->|"Deploy"| Files
+    Secrets -->|"Authenticate"| Creds
+    Creds -->|"Access"| Files
+```
+
 ---
 
 ## 📚 Pré-requisitos
@@ -34,27 +139,26 @@ Este projeto demonstra a implementação de um pipeline completo de CI/CD utiliz
 
 - Acesso ao **AWS Learner Lab** da FIAP
 - Credenciais AWS configuradas
-- Permissões para S3, CloudFront e IAM
+- Permissões para S3 e IAM
 
 ---
 
 ## 🎯 **Guias de Aprendizado**
 
-### **📚 Para Alunos - Jornada Completa:**
+### **📚 Jornada Completa de Aprendizado:**
 1. **🔧 `STEP-BY-STEP-LOCAL.md`** - **COMECE AQUI!** Deploy manual completo
-2. **🤖 `STEP-BY-STEP-GITHUB-ACTIONS.md`** - Automatize com CI/CD
-3. **💪 `EXERCICIOS.md`** - Exercícios práticos
+2. **🤖 `STEP-BY-STEP-GITHUB-ACTIONS.md`** - Automatize tudo com CI/CD
+3. **⚙️ `SETUP-ENVIRONMENT.md`** - Configuração do ambiente
+4. **🏗️ `ARQUITETURA.md`** - Diagramas e arquitetura detalhada
 
-### **🎓 Para Professores:**
-- **📋 `LIVE-GUIDE.md`** - Roteiro da live (60 min)
-- **⚙️ `SETUP-ENVIRONMENT.md`** - Configuração do ambiente
+> 📋 **Ver `INDICE.md` para navegação completa de todos os arquivos**
 
 ### **🎯 Metodologia:**
 **Manual Primeiro → Depois Automatizado**
-- ✅ Entender cada passo
-- ✅ Ver problemas do manual  
-- ✅ Apreciar a automação
-- ✅ DevOps na prática!
+- ✅ Entender cada passo do processo
+- ✅ Ver os problemas do deploy manual  
+- ✅ Apreciar o valor da automação
+- ✅ DevOps na prática real!
 
 ---
 

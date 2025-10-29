@@ -23,7 +23,7 @@ git --version   # deve mostrar git version 2.x.x
 ```
 
 ### ❌ **Se algo estiver faltando:**
-- Consulte o arquivo `SETUP-ENVIRONMENT.md` para instalação
+- Consulte o arquivo `SETUP-ENVIRONMENT.md` para instalação detalhada
 
 ---
 

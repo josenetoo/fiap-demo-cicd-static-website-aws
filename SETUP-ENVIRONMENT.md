@@ -268,18 +268,4 @@ npm start -- --port 3001
 
 ---
 
-## 📞 Suporte
-
-### **Durante a Live**
-- Use o chat para dúvidas
-- Compartilhe prints de erros
-- Seja específico sobre o problema
-
-### **Após a Live**
-- Email: professor@fiap.com.br
-- Fórum do curso
-- Documentação oficial das ferramentas
-
----
-
 **🎓 Ambiente configurado? Vamos começar! 🚀**

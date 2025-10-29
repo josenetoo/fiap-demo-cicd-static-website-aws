@@ -245,20 +245,12 @@ git push origin main
 
 ## 🎯 **Próximos Passos Avançados**
 
-### **1. Melhorias no Pipeline**
-- Adicionar notificações Slack/Discord
-- Implementar deploy em staging primeiro
-- Adicionar rollback automático
-
-### **2. Monitoramento**
-- CloudWatch para métricas
-- Alertas de disponibilidade
-- Logs de acesso
-
-### **3. Segurança**
-- Rotação automática de credenciais
-- Scan de vulnerabilidades
-- Políticas de acesso mais restritivas
+### **1. Melhorias Possíveis:**
+- **Notificações**: Slack, Discord, email
+- **Ambientes**: Staging → Production
+- **Rollback**: Automático em caso de falha
+- **Monitoramento**: CloudWatch, alertas
+- **Segurança**: Scan de vulnerabilidades, rotação de credenciais
 
 ---
 
