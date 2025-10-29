@@ -38,7 +38,27 @@ Este projeto demonstra a implementação de um pipeline completo de CI/CD utiliz
 
 ---
 
-## 🚀 Guia Passo-a-Passo
+## 🎯 **Guias de Aprendizado**
+
+### **📚 Para Alunos - Jornada Completa:**
+1. **🔧 `STEP-BY-STEP-LOCAL.md`** - **COMECE AQUI!** Deploy manual completo
+2. **🤖 `STEP-BY-STEP-GITHUB-ACTIONS.md`** - Automatize com CI/CD
+3. **💪 `EXERCICIOS.md`** - Exercícios práticos
+
+### **🎓 Para Professores:**
+- **📋 `LIVE-GUIDE.md`** - Roteiro da live (60 min)
+- **⚙️ `SETUP-ENVIRONMENT.md`** - Configuração do ambiente
+
+### **🎯 Metodologia:**
+**Manual Primeiro → Depois Automatizado**
+- ✅ Entender cada passo
+- ✅ Ver problemas do manual  
+- ✅ Apreciar a automação
+- ✅ DevOps na prática!
+
+---
+
+## 🚀 Guia Passo-a-Passo (Resumido)
 
 ### **Etapa 1: Configuração do Ambiente Local**
 

@@ -52,9 +52,13 @@ function App() {
           <div className="course-info">
             <h4>Sobre o Curso</h4>
             <p>
-              Este projeto demonstra a implementação de um pipeline de CI/CD 
-              completo utilizando GitHub Actions para deploy automatizado 
-              de aplicações estáticas no AWS S3.
+              <strong>DOMINE O CICLO COMPLETO DE DEVOPS, DO CÓDIGO À ENTREGA.</strong>
+            </p>
+            <p>
+              No curso de DevOps e Arquitetura Cloud, você se prepara para assumir um papel 
+              estratégico no universo DevOps. Integre práticas ágeis, automação e ferramentas 
+              de ponta para conectar desenvolvimento, infraestrutura e operações de forma 
+              fluida, segura e escalável.
             </p>
             <div className="links">
               <a 

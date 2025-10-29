@@ -14,41 +14,80 @@
 
 #### **Apresentação do Projeto (5 min)**
 - Mostrar o site final funcionando no S3
-- Explicar arquitetura: React → GitHub Actions → S3
-- Demonstrar pipeline simplificado em ação
+- Explicar a **jornada de aprendizado**: Manual → Automatizado
+- **Por que começar manual?** Entender cada passo antes de automatizar
 
 #### **Conceitos Fundamentais (5 min)**
-- **CI/CD**: Continuous Integration/Continuous Deployment
-- **GitHub Actions**: Automação de workflows
-- **S3 Static Hosting**: Hospedagem de sites estáticos
-- **Deploy Automatizado**: Build e deploy em uma etapa
+- **DevOps Philosophy**: Entender antes de automatizar
+- **CI/CD**: Do código à entrega automatizada
+- **Infrastructure as Code**: AWS S3 via comandos
+- **GitHub Actions**: Automação de todo o processo manual
 
 ---
 
-### 🛠️ **Hands-On: Configuração (20 min)**
+### 🛠️ **PARTE 1: Deploy Manual (25 min)**
 
-#### **1. Setup do Ambiente AWS (8 min)**
+#### **1. Setup AWS + Deploy Manual (20 min)**
 ```bash
-# Demonstrar ao vivo
+# Seguir: STEP-BY-STEP-LOCAL.md
 cd fiap-demo-cicd-static-website-aws
+
+# 1. Criar infraestrutura
 ./scripts/setup-aws.sh
+
+# 2. Build local
+npm install
+npm run build
+
+# 3. Deploy manual
+source .env.local
+aws s3 sync build/ s3/$REACT_APP_BUCKET_NAME --profile fiapaws
+
+# 4. Verificar resultado
+echo "Site: $REACT_APP_WEBSITE_URL"
 ```
 
-**Pontos importantes:**
-- Explicar credenciais temporárias do Learner Lab
-- Mostrar criação do bucket S3
-- Demonstrar configuração de hosting estático
+#### **2. Reflexão: Problemas do Manual (5 min)**
+- **Pergunta aos alunos:** "O que acontece se esquecermos um passo?"
+- **Discussão:** Escalabilidade, erros humanos, repetição
+- **Transição:** "Vamos automatizar tudo isso!"
 
-#### **2. Configuração do GitHub (7 min)**
-- Fork do repositório
-- Configuração das Secrets:
-  - `AWS_ACCESS_KEY_ID`
-  - `AWS_SECRET_ACCESS_KEY` 
-  - `AWS_SESSION_TOKEN`
-  - `S3_BUCKET_NAME`
+---
 
-#### **3. Análise do Código (5 min)**
-- Estrutura do projeto React
+### 🤖 **PARTE 2: Automação GitHub Actions (25 min)**
+
+#### **1. Configurar Secrets GitHub (10 min)**
+```bash
+# Seguir: STEP-BY-STEP-GITHUB-ACTIONS.md
+
+# Mostrar credenciais AWS
+aws configure list --profile fiapaws
+
+# Configurar no GitHub:
+# Settings → Secrets → Actions
+# - AWS_ACCESS_KEY_ID
+# - AWS_SECRET_ACCESS_KEY  
+# - AWS_SESSION_TOKEN
+# - S3_BUCKET_NAME
+```
+
+#### **2. Primeiro Deploy Automatizado (10 min)**
+```bash
+# Fazer alteração
+echo "// Deploy Automatizado!" >> src/App.js
+
+# Push (vai triggerar pipeline)
+git add .
+git commit -m "feat: primeiro deploy automatizado"
+git push origin main
+
+# Acompanhar no GitHub Actions
+```
+
+#### **3. Comparação e Resultados (5 min)**
+- **Mostrar:** Mesmo resultado, processo diferente
+- **Comparar:** Manual (8 passos) vs Automatizado (3 passos)
+- **Destacar:** Velocidade, confiabilidade, escalabilidade
 - Arquivo `deploy.yml` do GitHub Actions
 - Explicar jobs: test → build → deploy
 
