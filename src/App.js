@@ -78,7 +78,7 @@ function App() {
         </div>
 
         <footer className="App-footer">
-          <p>© 2024 FIAP - Faculdade de Informática e Administração Paulista</p>
+          <p>© 2025 FIAP - Faculdade de Informática e Administração Paulista</p>
           <p>Desenvolvido para fins educacionais</p>
         </footer>
       </header>
