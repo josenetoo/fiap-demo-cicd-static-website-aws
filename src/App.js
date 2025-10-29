@@ -52,7 +52,7 @@ function App() {
           <div className="course-info">
             <h4>Sobre o Curso</h4>
             <p>
-              <strong>DOMINE O CICLO COMPLETO DE DEVOPS, DO CÓDIGO À ENTREGA.</strong>
+              <strong>DOMINE O CICLO COMPLETO DE DEVOPS, DO CÓDIGO À ENTREGA!</strong>
             </p>
             <p>
               No curso de DevOps e Arquitetura Cloud, você se prepara para assumir um papel 
