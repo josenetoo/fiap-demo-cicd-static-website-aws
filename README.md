@@ -151,8 +151,6 @@ graph LR
 3. **⚙️ `SETUP-ENVIRONMENT.md`** - Configuração do ambiente
 4. **🏗️ `ARQUITETURA.md`** - Diagramas e arquitetura detalhada
 
-> 📋 **Ver `INDICE.md` para navegação completa de todos os arquivos**
-
 ### **🎯 Metodologia:**
 **Manual Primeiro → Depois Automatizado**
 - ✅ Entender cada passo do processo
@@ -191,16 +189,13 @@ npm run build
 
 ### **Etapa 2: Configuração do AWS CLI**
 
-#### 2.1 Configurar Profile AWS
+#### 2.1 Configuração Automática (Recomendado)
 ```bash
-# Configurar profile fiapaws
-aws configure --profile fiapaws
+# Execute o script de configuração
+./scripts/setup-aws.sh
 
-# Inserir as credenciais do Learner Lab:
-# AWS Access Key ID: [SUA_ACCESS_KEY]
-# AWS Secret Access Key: [SUA_SECRET_KEY]
-# Default region name: us-east-1
-# Default output format: json
+# Se as credenciais expirarem depois:
+./scripts/setup-aws.sh  # Script inteligente: detecta o que precisa atualizar
 ```
 
 #### 2.2 Testar Conexão
@@ -282,6 +277,21 @@ Acesse: `Settings > Secrets and variables > Actions`
 O pipeline possui 1 job simplificado:
 
 **build-and-deploy**: Instala dependências → Build → Deploy no S3
+
+---
+
+## 🧹 **Limpeza de Recursos**
+
+### **Após os testes:**
+```bash
+# Script automatizado de limpeza
+./scripts/cleanup-aws.sh
+```
+
+### **Remove:**
+- Bucket S3 e arquivos
+- Políticas e configurações
+- Arquivos locais (.env.local, build/)
 
 ### **Etapa 5: Deploy e Teste**
 

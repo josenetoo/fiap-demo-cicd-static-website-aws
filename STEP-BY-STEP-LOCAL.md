@@ -35,6 +35,23 @@ git --version   # deve mostrar git version 2.x.x
 ./scripts/setup-aws.sh
 ```
 
+### **❌ Se der erro de credenciais:**
+```bash
+# Execute novamente o script de setup
+./scripts/setup-aws.sh
+
+# O script irá:
+# 1. Detectar que o profile já existe
+# 2. Perguntar se quer atualizar (s/N)
+# 3. Se escolher 'N': Testa conexão e pede só Session Token se necessário
+# 4. Se escolher 's': Reconfigura tudo
+```
+
+#### **💡 Dica:**
+- **Session Token** expira mais rápido (algumas horas)
+- **Access Key/Secret** duram mais tempo
+- O script é inteligente e só pede o que precisa
+
 ### **Opção B: Comandos Manuais**
 ```bash
 # 1. Configurar credenciais AWS
@@ -244,18 +261,34 @@ Agora que entendemos **todo o processo manual**, vamos automatizar tudo isso com
 
 ---
 
-## 📝 **Comandos de Limpeza (Opcional)**
+## 🧹 **Limpeza de Recursos**
 
-### **Se quiser limpar tudo depois:**
+### **Opção A: Script Automatizado (Recomendado)**
 ```bash
-# Remover bucket (cuidado!)
+# Usar o script de limpeza completa
+./scripts/cleanup-aws.sh
+```
+
+### **Opção B: Comandos Manuais**
+```bash
+# Carregar variáveis
+source .env.local
+
+# Remover arquivos do bucket
 aws s3 rm s3://$REACT_APP_BUCKET_NAME --recursive --profile fiapaws
+
+# Remover bucket
 aws s3 rb s3://$REACT_APP_BUCKET_NAME --profile fiapaws
 
 # Remover arquivos locais
 rm -rf build/
 rm .env.local
 ```
+
+### **⚠️ Importante:**
+- **Ação irreversível**: Todos os dados serão perdidos
+- **Confirme sempre**: O script pede confirmação
+- **Credenciais válidas**: Certifique-se que não expiraram
 
 ---
 

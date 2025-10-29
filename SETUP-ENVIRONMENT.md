@@ -268,4 +268,20 @@ npm start -- --port 3001
 
 ---
 
+## 🤖 **Scripts Disponíveis**
+
+### **📋 Scripts de Automação**
+| Script | Função | Quando Usar |
+|--------|--------|-------------|
+| `./scripts/setup-aws.sh` | Configura AWS CLI e cria infraestrutura S3 | Primeira configuração ou atualização de credenciais |
+| `./scripts/cleanup-aws.sh` | Remove todos os recursos AWS criados | Ao final dos testes para limpar custos |
+
+### **💡 Uso Inteligente do setup-aws.sh:**
+- **Primeira vez**: Configura tudo do zero
+- **Credenciais existentes**: Detecta automaticamente e pergunta se quer atualizar
+- **Session Token expirado**: Testa conexão e pede apenas o que precisa
+- **Sempre seguro**: Nunca sobrescreve sem perguntar
+
+---
+
 **🎓 Ambiente configurado? Vamos começar! 🚀**

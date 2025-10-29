@@ -274,4 +274,27 @@ git push origin main
 
 **🎉 Parabéns! Você criou seu primeiro pipeline de CI/CD completo! 🚀**
 
+---
+
+## 🧹 **Limpeza de Recursos**
+
+### **Quando terminar os testes:**
+```bash
+# Limpar todos os recursos AWS criados
+./scripts/cleanup-aws.sh
+```
+
+### **O que será removido:**
+- ✅ Bucket S3 e todos os arquivos
+- ✅ Política de acesso público
+- ✅ Configuração de website hosting
+- ✅ Arquivos locais (.env.local, build/)
+
+### **⚠️ Atenção:**
+- **Ação irreversível**: Confirme antes de executar
+- **Credenciais válidas**: Verifique se não expiraram no Learner Lab
+- **Backup**: Faça backup se necessário
+
+---
+
 **💡 Agora você entende tanto o processo manual quanto a automação - isso é DevOps na prática! 🎓**
