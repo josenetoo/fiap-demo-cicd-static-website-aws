@@ -224,40 +224,7 @@ aws s3api get-bucket-website --bucket $REACT_APP_BUCKET_NAME --profile fiapaws
 
 ---
 
-## 🎓 **Reflexão: O que Aprendemos?**
-
-### **Processo Manual que Fizemos:**
-1. ✅ **Configurar AWS** (credenciais, bucket, políticas)
-2. ✅ **Preparar código** (install, build)
-3. ✅ **Deploy manual** (sync para S3)
-4. ✅ **Testar resultado** (verificar site)
-5. ✅ **Fazer mudanças** (edit, rebuild, redeploy)
-
-### **Problemas do Processo Manual:**
-- 🐌 **Lento**: Muitos comandos manuais
-- 😰 **Propenso a erros**: Fácil esquecer um passo
-- 🔄 **Repetitivo**: Mesmo processo toda vez
-- 👥 **Não escalável**: E se fossem 10 desenvolvedores?
-
 ### **💡 Solução: Automatizar com GitHub Actions!**
-
----
-
-## 🚀 **Próximo Passo: GitHub Actions**
-
-Agora que entendemos **todo o processo manual**, vamos automatizar tudo isso com **GitHub Actions**!
-
-### **O que o GitHub Actions vai fazer por nós:**
-- ✅ **Trigger automático** quando fizermos push
-- ✅ **Build automático** da aplicação
-- ✅ **Deploy automático** no S3
-- ✅ **Notificação** do resultado
-
-### **Vantagens:**
-- ⚡ **Rápido**: Deploy em 2-3 minutos
-- 🔒 **Confiável**: Sempre os mesmos passos
-- 👥 **Colaborativo**: Toda a equipe usa o mesmo processo
-- 📊 **Rastreável**: Histórico de todos os deploys
 
 ---
 
@@ -284,11 +251,6 @@ aws s3 rb s3://$REACT_APP_BUCKET_NAME --profile fiapaws
 rm -rf build/
 rm .env.local
 ```
-
-### **⚠️ Importante:**
-- **Ação irreversível**: Todos os dados serão perdidos
-- **Confirme sempre**: O script pede confirmação
-- **Credenciais válidas**: Certifique-se que não expiraram
 
 ---
 
