@@ -1,0 +1,57 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  NODE_VERSION: '18'
+  AWS_REGION: 'us-east-1'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build application
+      run: npm run build
+      env:
+        REACT_APP_BUILD_NUMBER: ${{ github.run_number }}
+        REACT_APP_COMMIT_SHA: ${{ github.sha }}
+        
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        aws-region: ${{ env.AWS_REGION }}
+        
+    - name: Deploy to S3
+      run: |
+        aws s3 sync build/ s3://${{ secrets.S3_BUCKET_NAME }} --delete --cache-control max-age=86400
+        
+    - name: Get S3 Website URL
+      run: |
+        echo "🌐 Site disponível em: http://${{ secrets.S3_BUCKET_NAME }}.s3-website-${{ env.AWS_REGION }}.amazonaws.com"
+        
+    - name: Deployment notification
+      if: success()
+      run: |
+        echo "🚀 Deploy realizado com sucesso!"
+        echo "📅 Data: $(date)"
+        echo "🔢 Build: ${{ github.run_number }}"
+        echo "📝 Commit: ${{ github.sha }}"
+        echo "🌐 URL: http://${{ secrets.S3_BUCKET_NAME }}.s3-website-${{ env.AWS_REGION }}.amazonaws.com"
